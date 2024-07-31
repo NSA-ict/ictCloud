@@ -36,7 +36,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Number</th>
+                <th>📱 Number</th>
+                <th>Position</th>
                 <th>Email</th>
             </tr>
         </thead>
@@ -62,12 +63,13 @@
             tableBody.innerHTML = ''; // Clear previous results
 
             data.slice(1).forEach(row => {
-                const [name, number, email] = row;
+                const [name, number, position,email] = row;
                 if (name.toLowerCase().includes(query)) {
                     const rowElement = document.createElement('tr');
                     rowElement.innerHTML = `
                         <td>${name}</td>
                         <td>${number}</td>
+                        <td>${position}</td>
                         <td>${email}</td>
                     `;
                     tableBody.appendChild(rowElement);
