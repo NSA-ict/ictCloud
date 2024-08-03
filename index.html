@@ -3,49 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel Files Search</title>
+    <title>ICT server</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #ffffff;
         }
-        input {
-            margin-bottom: 10px;
+        .title-bar {
+            width: 100%;
+            height: 100px; /* Title bar height */
+            background-image: url('background-image1.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 50px; /* Set the top margin to 50px */
+            padding-left: 120px; /* Space for image */
+            box-sizing: border-box;
+        }
+        .title-bar h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: black; /* Change the text color to black */
+            position: absolute;
+            left: 43%; /* Center horizontally */
+    transform: translateX(-30%); /* Adjust the position to be truly centered */
+        }
+        .image-container {
+            position: absolute;
+            left: 20px; /* Position the image container 20px from the left */
+            top: -17.5px; /* Adjust this value to control how much of the image is outside the title bar */
+            width: 65px; /* Image size */
+            height: 65px; /* Image size */
+            overflow: hidden;
+            border-radius: 50%;
+            background-color: white; /* Set the background color to solid blue */
+            border: 3px solid blue; /* Border color */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #9D9DDD;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Ensure horizontal scroll if needed */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            margin-right: 10px;
             padding: 5px;
             font-size: 16px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+        .search-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .search-button img {
+            width: 50px; /* Set the size of the search icon */
+            height: 50px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            color: #ffffff; /* Dark blue color */
+           
         }
         th {
-            background-color: #f4f4f4;
+            background-color: #FFD300; /* Chromatic yellow */
+    color: #00008B; /* Dark blue color for the text */
         }
     </style>
 </head>
 <body>
-    <h1>ICt Design Phone Books📚</h1>
-    <input type="text" id="search" placeholder="Search by name" oninput="searchData()">
-    <table id="results">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>📱 Number</th>
-                <th>Position</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Results will be inserted here -->
-        </tbody>
-    </table>
-
+    <div class="title-bar">
+        <div class="image-container">
+           <img src="ict.png" alt="Sample Image">
+        </div>
+        <h1>ICt Design Phone Books</h1>
+    </div>
+    <div class="content">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by name">
+            <button class="search-button" onclick="searchData()">
+                <img src="search-icon.png" alt="Search Icon"> <!-- Replace with your search icon image -->
+            </button>
+        </div>
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>📱 Number</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Results will be inserted here -->
+            </tbody>
+        </table>
+    </div>
     <script>
         const sheetId = '11MOA74BeDOGaBkaZo-hzEYHmA433QjsJ1cx7lgSV05Q'; // Replace with your Google Sheet ID
         const apiKey = 'AIzaSyBGP0su_B0on_PmPEVLBTSOxur6FdaNCFY'; // Replace with your Google API Key
@@ -63,7 +142,7 @@
             tableBody.innerHTML = ''; // Clear previous results
 
             data.slice(1).forEach(row => {
-                const [name, number, position,email] = row;
+                const [name, number, position, email] = row;
                 if (name.toLowerCase().includes(query)) {
                     const rowElement = document.createElement('tr');
                     rowElement.innerHTML = `
@@ -82,4 +161,3 @@
     </script>
 </body>
 </html>
-
